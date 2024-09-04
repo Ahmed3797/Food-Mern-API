@@ -28,9 +28,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-
+app.use("/",(req,res)=>
+{
+ res.send("hello");
+})
 app.use("/api/users", userRoutes);
 app.use("/api/carts", cartRoutes);
 app.use("/api/orders", orderRoutes);
