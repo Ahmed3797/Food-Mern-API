@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
     }
 
     const payload = { userId: user._id };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "30d" });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
 
     res.json({ token });
   } catch (error) {
@@ -53,6 +53,8 @@ exports.login = async (req, res) => {
 
 exports.adminLogin = async (req, res) => {
   const { email, password } = req.body;
+
+  console.log(email,password," I am in AdminLogin")
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -65,7 +67,7 @@ exports.adminLogin = async (req, res) => {
     }
 
     const payload = { userId: user._id };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "5h" });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
 
     res.json({ token });
   } catch (error) {

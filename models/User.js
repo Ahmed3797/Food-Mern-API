@@ -9,7 +9,7 @@ const userSchema = new Schema({
   isAdmin: { type: Boolean, default: false }
 });
 
-// Hash password before saving the user
+
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) {
     return next();
@@ -19,7 +19,7 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
-// Compare hashed password with the plain text password
+
 userSchema.methods.comparePassword = function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
