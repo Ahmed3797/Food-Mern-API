@@ -19,7 +19,7 @@ const categoryRoutes = require("./routes/categories");
 app.use(cors({
   origin: '*', // Allows all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add all HTTP methods you need
-  allowedHeaders: ['Content-Type', 'Authorization'] // Include any necessary headers
+  allowedHeaders: ['Content-Type', 'Authorization','x-auth-token'] // Include any necessary headers
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
