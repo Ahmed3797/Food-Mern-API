@@ -16,9 +16,14 @@ const orderRoutes = require("./routes/order");
 const productRoutes = require("./routes/product");
 const categoryRoutes = require("./routes/categories");
 
+app.use(cors({
+  origin: '*', // Allows all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add all HTTP methods you need
+  allowedHeaders: ['Content-Type', 'Authorization'] // Include any necessary headers
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
 
 // Use routes
 app.use("/api/users", userRoutes);
