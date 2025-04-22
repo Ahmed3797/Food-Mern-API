@@ -59,9 +59,5 @@ npm install
 npm run dev
 🌍 Deployment
 The API is deployed on Vercel:
-
-arduino
-Copy
-Edit
 https://food-mern-api.vercel.app/
 
