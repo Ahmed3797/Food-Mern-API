@@ -67,3 +67,22 @@ exports.postFromCart = async (req, res) => {
 
   res.json(populatedCart);
 };
+
+
+exports.getPrice = async (req,res)=>
+{
+  console.log("here")
+  const cart = await Cart.findOne({ userId: req.user }).populate(
+    "items.productId"
+  );
+  if (!cart) return res.status(404).send("Cart not found");
+  let total = 0;
+  for (const item of cart.items) {
+    const product = item.productId;
+    if (product && product.price) {
+      total += product.price * item.quantity;
+    }
+  }
+
+  res.json({"subtotal":total,"deliveryFee":10,"total":total+10})
+}

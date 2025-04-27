@@ -10,6 +10,10 @@ router.get("/", cartController.getUserCart);
 
 router.post("/", cartController.postInCart);
 
+router.get("/price",cartController.getPrice);
+
 router.delete("/:itemId", cartController.postFromCart);
+
+
 
 module.exports = router;

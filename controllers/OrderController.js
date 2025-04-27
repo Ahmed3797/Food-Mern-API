@@ -35,7 +35,7 @@ exports.createOrder = async (req, res) => {
     const totalAmount = cart.items.reduce((total, item) => {
       return total + item.productId.price * item.quantity;
     }, 0);
-
+    totalAmount= totalAmount + 10;
     const order = new Order({
       userId: req.user,
       items: cart.items.map((item) => ({

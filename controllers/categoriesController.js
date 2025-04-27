@@ -1,6 +1,8 @@
 const Category = require("../models/Category");
+const categories = require("../routes/categories");
 const {cloudinary} = require("../utils/cloudinary"); // Assuming cloudinary config is set up in utils
 const fs = require("fs");
+const Product = require("../models/Product");
 
 exports.getAllCategories = async (req, res) => {
   try {
@@ -88,3 +90,17 @@ exports.deleteCategory = async (req, res) => {
     res.status(500).json({ error: "Failed to delete category" });
   }
 };
+
+
+exports.seeByCategory = async (req,res) => 
+{
+   const id=req?.params?.id
+  try {
+    const data=await Product.find({category:id})
+    if (!data) return res.status(404).send("Category not found");
+    res.json(data)
+  } catch (error) {
+    res.status(500).json({ error: "Failed to find product in this category " });
+  }
+
+}
