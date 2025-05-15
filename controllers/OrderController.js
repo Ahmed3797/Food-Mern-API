@@ -26,13 +26,13 @@ exports.createOrder = async (req, res) => {
   const { deliveryInfo } = req.body;
 
   try {
-    const cart = await Cart.findOne({ userId: req.user }).populate(
+    let cart = await Cart.findOne({ userId: req.user }).populate(
       "items.productId"
     );
     if (!cart || cart.items.length === 0)
       return res.status(400).send("Cart is empty");
 
-    const totalAmount = cart.items.reduce((total, item) => {
+    let totalAmount = cart.items.reduce((total, item) => {
       return total + item.productId.price * item.quantity;
     }, 0);
     totalAmount= totalAmount + 10;
@@ -53,6 +53,7 @@ exports.createOrder = async (req, res) => {
 
     res.status(201).json(order);
   } catch (error) {
+    console.log(error)
     res.status(500).send("Server error");
   }
 };
